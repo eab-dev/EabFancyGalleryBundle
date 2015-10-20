@@ -1,0 +1,6 @@
+{
+    "name": "eab_fancy_gallery_bundle",
+    "dependencies": {
+        "fancybox": "~2.1.5"
+    }
+}

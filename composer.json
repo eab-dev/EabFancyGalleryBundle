@@ -1,0 +1,22 @@
+{
+    "name": "eab/fancygallerybundle",
+    "description": "A simple gallery bundle for eZ Publish, using FancyBox",
+    "authors": [
+        {
+            "name": "Andy Caiger",
+            "email": "acaiger@eab.uk"
+        }
+    ],
+    "require": {
+        "sp/bower-bundle": "@stable"
+    },
+    "minimum-stability": "stable",
+   "scripts": {
+       "post-install-cmd": [
+           "Sp\\BowerBundle\\Composer\\ScriptHandler::bowerInstall"
+       ],
+       "post-update-cmd": [
+           "Sp\\BowerBundle\\Composer\\ScriptHandler::bowerInstall"
+       ]
+   }
+}

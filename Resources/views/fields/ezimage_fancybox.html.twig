@@ -1,0 +1,24 @@
+{# This field accepts the following parameters:
+    - alias (image variation name). Defaults to "original" (e.g. image originally uploaded)
+    - field / versionInfo / parameters are additional variables passed to every field template block. See EzPublishCodeBundle::content_fields_html.twig
+ #}
+{% block ezimage_field %}
+    {% if not ez_is_field_empty( content, field ) %}
+        {% set originalAlias = ez_image_alias( field, versionInfo, 'original' ) %}
+        {% set thumbAlias = ez_image_alias( field, versionInfo, parameters.alias|default( 'original' ) ) %}
+        {# if thumbAlias is not found, null is returned, an error is added in logs and the image is not displayed #}
+        {% if thumbAlias %}
+            {% spaceless %}
+            <a href="{{ asset( originalAlias.uri ) }}" class="fancybox" data-fancybox-group="gallery"
+               {% if parameters.title is defined %}title="{{ parameters.title }}"{% endif %}>
+                <img src="{{ asset( thumbAlias.uri ) }}"
+                {% if parameters.class is defined %}class="{{ parameters.class }}"{% endif %}
+                {% if thumbAlias.width %}width="{{ thumbAlias.width }}"{% endif %}
+                {% if thumbAlias.height %}height="{{ thumbAlias.height }}"{% endif %}
+                alt="{{ field.value.alternativeText }}"/>
+            </a>
+            {% endspaceless %}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+

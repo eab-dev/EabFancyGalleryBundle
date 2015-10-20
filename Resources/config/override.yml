@@ -1,0 +1,15 @@
+system:
+    default:
+        location_view:
+            full:
+                gallery:
+                    controller: EabFancyGalleryBundle:Content:listChildren
+                    template: EabFancyGalleryBundle:full:gallery.html.twig
+                    match:
+                        Identifier\ContentType: gallery
+            gallery:
+                image:
+                    controller: EabFancyGalleryBundle:Content:thumbnail
+                    template: EabFancyGalleryBundle:gallery:image.html.twig
+                    match:
+                        Identifier\ContentType: image

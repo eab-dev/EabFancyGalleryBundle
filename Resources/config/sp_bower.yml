@@ -1,0 +1,16 @@
+# Custom configuration for SpBowerBundle
+# If install_on_warmup is false (the default) we get 'Dependency cache keys not yet generated' error
+install_on_warmup: true
+assetic:
+        enabled: true
+        filters:
+            packages:
+                fancybox:
+                    css:
+                        - cssrewrite
+                    js:
+                        - ?uglifyjs
+bundles:
+    EabFancyGalleryBundle:
+        asset_dir: ../../public/components
+        cache: '%kernel.cache_dir%/eab_fancy_gallery'

@@ -1,0 +1,68 @@
+{# Gallery using Fancybox - full view #}
+
+{% extends pagelayout %}
+
+{% block content %}
+<div class="content-view-full">
+    <div class="class-gallery">
+
+        {% if summaryInFullView and not ez_is_field_empty( content, 'short_description' ) %}
+            {{ ez_render_field( content,
+                                'short_description',
+                                {
+                                    'attr': { 'class': 'attribute-short' }
+                                }
+            ) }}
+        {% endif %}
+
+        {% if not ez_is_field_empty( content, 'description' ) %}
+            {{ ez_render_field( content,
+                                'description',
+                                {
+                                    'attr': { 'class': 'attribute-long' }
+                                }
+            ) }}
+        {% endif %}
+
+        <div class="content-view-children row">
+        {% for child in pager %}
+            {{ render( controller( 'ez_content:viewLocation',
+                                    { 'locationId': child.contentInfo.mainLocationId,
+                                      'viewType': 'gallery' } ) ) }}
+        {% endfor %}
+        </div>
+
+        {# Pagination is displayed only if needed (number of children > limit) #}
+
+        {% if pager.haveToPaginate() %}
+        <div class="pager">
+            <div class="pagination-centered">
+                {{ pagerfanta( pager, 'twitter_bootstrap_translated', { 'routeName': location } ) }}
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}
+
+{% block footerScript %}
+{{ parent() }}
+
+{# We have to load the Javascript explicitly so it can find the dependent images #}
+<script type="text/javascript" src="/bundles/eabfancygallery/components/fancybox/source/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript">
+    $( document ).ready( function() {
+        {# Change title position and overlay color #}
+        $( ".fancybox" ).fancybox({
+            helpers: {
+                title : { type : 'inside' },
+                overlay : {
+                    css : { 'background' : 'rgba(255,255,255,0.5)' }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
