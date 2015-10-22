@@ -25,9 +25,10 @@ Licensed under [GNU General Public License 2.0](http://www.gnu.org/licenses/gpl-
 
 ##Installation
 
-Add EabFancyGalleryBundle to your `composer.json` and download it by running:
+If you have access to the EAB packages repository, add EabFancyGalleryBundle
+to your `composer.json` and download it by running:
 
-    $ php composer.phar require eab/fancygallerybundle
+    $ composer require --update-no-dev --prefer-dist eab/fancygallerybundle
 
 Composer will install the bundle and its dependencies and use bower to install
 the latest version of FancyBox.
