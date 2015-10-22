@@ -46,17 +46,6 @@ public function registerBundles()
 }
 ```
 
-Unless you want to create your own style for the popups, edit
-your `page_header_style.html.twig` template and include the FancyBox CSS asset:
-
-    {% stylesheets filter='cssrewrite,?cssmin'
-        ...
-        'bundles/eabfancygallery/components/fancybox/source/jquery.fancybox.css'
-        ...
-    %}
-    <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
-    {% endstylesheets %}
-
 If you didn't use Composer to install the bundle, install the latest version of
 FancyBox manually:
 
@@ -85,9 +74,25 @@ The following settings can be configured in the same way as `pagelayout`:
 * `children_types` - array of content types that should be displayed in the gallery
 * `image_variation` - the image variation to use for thumbnails
 
+
 You can also override the templates by copying `Resources/config/override.yaml`
 into your own bundle's configuration and changing the controllers or templates
 (hint: change the keys e.g. change `image:` to `image_override:`).
+
+The FancyBox CSS is loaded by the gallery template. If you want to load it on
+all pages you need to:
+
+1. Override `full/gallery.html.twig` with your own template that doesn't load the CSS.
+
+2. Edit your `page_header_style.html.twig` template and include the FancyBox CSS asset:
+
+        {% stylesheets filter='cssrewrite,?cssmin'
+            ...
+            'bundles/eabfancygallery/components/fancybox/source/jquery.fancybox.css'
+            ...
+        %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+        {% endstylesheets %}
 
 #Updating
 

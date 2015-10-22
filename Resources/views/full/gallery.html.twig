@@ -2,6 +2,15 @@
 
 {% extends pagelayout %}
 
+{% block page_head %}
+{{ parent() }}
+{% stylesheets filter='cssrewrite,?cssmin'
+    'bundles/eabfancygallery/components/fancybox/source/jquery.fancybox.css'
+%}
+<link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+{% endstylesheets %}
+{% endblock %}
+
 {% block content %}
 <div class="content-view-full">
     <div class="class-gallery">
