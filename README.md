@@ -9,48 +9,66 @@ A simple gallery bundle for eZ Publish, using FancyBox.
 
 Andy Caiger <acaiger@eab.uk>
 
-##Copyright
+## Copyright
 
 Copyright (C) 2014-2015 [Enterprise AB Ltd](http://eab.uk)
 
-##License
+## License
 
 Licensed under [GNU General Public License 2.0](http://www.gnu.org/licenses/gpl-2.0.html)
 
-##Requirements
+## Requirements
 
 * [bower](http://bower.io)
 * [fancyBox](https://libraries.io/bower/fancyBox)
 * [Bootstrap 3](http://getbootstrap.com/)
 
-##Installation
+## Installation
 
-If you have access to the EAB packages repository, add EabFancyGalleryBundle
-to your `composer.json` and download it by running:
+1.  Install EabFancyGalleryBundle using composer:
 
-    $ composer require --update-no-dev --prefer-dist eab/fancygallerybundle
+        composer require --update-no-dev --prefer-dist eab/fancy-gallery-bundle
 
-Composer will install the bundle and its dependencies and use bower to install
-the latest version of FancyBox.
+    Composer will install the bundle and its dependencies and use bower to install
+    the latest version of FancyBox.
 
-Enable the bundle in the kernel by editing `ezpublish/EzPublishKernel.php`:
+    You can use git to install into the `src` subtree:
 
-``` php
-public function registerBundles()
-{
-    $bundles = array(
-        // ...
-        new Sp\BowerBundle\SpBowerBundle(),
-        new Eab\FancyGalleryBundle\EabFancyGalleryBundle(),
-    );
-}
-```
+        git clone https://github.com/eab-dev/EabFancyGalleryBundle.git src/Eab/FancyGalleryBundle
 
-If you didn't use Composer to install the bundle, install the latest version of
-FancyBox manually:
+    You will also have to do step 3 below.
+
+2.  Enable the bundle in the kernel by editing `ezpublish/EzPublishKernel.php`:
+
+    ``` php
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+            new Sp\BowerBundle\SpBowerBundle(),
+            new Eab\FancyGalleryBundle\EabFancyGalleryBundle(),
+            // ...
+        );
+    }
+    ```
+
+3.  If you didn't use Composer to install the bundle, install the latest version of
+    FancyBox manually:
 
     php ezpublish/console sp:bower:install
     php ezpublish/console assets:install --symlink
+
+If when installing the bower assets you see an error message like:
+
+    ECMDERR Failed to execute "git ls-remote --tags --heads git://github.com/fancyapps/fancyBox.git", exit code of #128 fatal: unable to connect to github.com
+
+the quick workaround is to disable the `git:` protocol:
+
+    git config --global url."https://".insteadOf git://
+
+and run the install command again.
+
+## Configuration
 
 If your bundle is not extending eZDemoBundle, you need to tell EabFancyGalleryBundle
 which pagelayout template to use. There are two easy ways to do this:
@@ -65,6 +83,8 @@ which pagelayout template to use. There are two easy ways to do this:
         parameters:
             eab_fancy_gallery.pagelayout: AcmeMyBundle::pagelayout.html.twig
 
+   With this second method make sure that your bundle is loaded after EabFancyGalleryBundle.
+
 #Customizing
 
 The following settings can be configured in the same way as `pagelayout`:
@@ -73,7 +93,6 @@ The following settings can be configured in the same way as `pagelayout`:
 * `page_limit` - number of images to show per page
 * `children_types` - array of content types that should be displayed in the gallery
 * `image_variation` - the image variation to use for thumbnails
-
 
 You can also override the templates by copying `Resources/config/override.yaml`
 into your own bundle's configuration and changing the controllers or templates
@@ -104,7 +123,10 @@ bower assets as well!
 
 1. This bundle assumes your website uses Bootstrap 3. If it doesn't you'll need
 to override and modify the templates.
+See the [example template](./Resources/doc/bootstrap2-example.md)
 
 2. The configuration for this bundle is not siteaccess aware. If your site has
-different layouts for different siteaccesses, please fork the repository,
-rewrite the code and issue a pull request. Thanks!
+different layouts for different siteaccesses, you can either override the
+gallery and image templates for each of your siteaccesses, or else reprogram
+the way that the 'pagelayout' template variable is set. So please fork the
+repository, rewrite the code and issue a pull request. Thanks!

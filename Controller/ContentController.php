@@ -14,12 +14,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ContentController extends Controller
 {
     /**
-     * Inject a pager containing the children of the specified location into the view
-     * The behaviour is the same as eZ Publish Legacy's folder class
-     * Which content types are fetched as children depends on legacy settings
-     *     menu.MenuContentSettings.ExtraIdentifierList (ie in menu.ini)
-     *     content.ChildrenNodeList.ExcludedClasses (ie in content.ini)
-     * Children of these types will be excluded
+     * Inject a pager containing the children of the specified location into the view.
+     * Which content types are fetched as children depends on the config setting:
+     *
+     *     eab_fancy_gallery.image_types
+     *
+     * The number of children per page is defined by the config setting:
+     *
+     *     eab_fancy_gallery.page_limit
      *
      * The signature of this method follows the one from the default view controller.
      * @param $locationId
