@@ -29,14 +29,11 @@ Licensed under [GNU General Public License 2.0](http://www.gnu.org/licenses/gpl-
 
         composer require --update-no-dev --prefer-dist eab/fancy-gallery-bundle
 
-    Composer will install the bundle and its dependencies and use bower to install
-    the latest version of FancyBox.
+    Composer will install the bundle and its dependencies into `vendors`.
 
     You can use git to install into the `src` subtree:
 
         git clone https://github.com/eab-dev/EabFancyGalleryBundle.git src/Eab/FancyGalleryBundle
-
-    You will also have to do step 3 below.
 
 2.  Enable the bundle in the kernel by editing `ezpublish/EzPublishKernel.php`:
 
@@ -52,8 +49,7 @@ Licensed under [GNU General Public License 2.0](http://www.gnu.org/licenses/gpl-
     }
     ```
 
-3.  If you didn't use Composer to install the bundle, install the latest version of
-    FancyBox manually:
+3.  Install the latest version of FancyBox:
 
         php ezpublish/console sp:bower:install
         php ezpublish/console assets:install --symlink
