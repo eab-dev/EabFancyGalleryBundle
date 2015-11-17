@@ -55,8 +55,8 @@ Licensed under [GNU General Public License 2.0](http://www.gnu.org/licenses/gpl-
 3.  If you didn't use Composer to install the bundle, install the latest version of
     FancyBox manually:
 
-    php ezpublish/console sp:bower:install
-    php ezpublish/console assets:install --symlink
+        php ezpublish/console sp:bower:install
+        php ezpublish/console assets:install --symlink
 
 If when installing the bower assets you see an error message like:
 
@@ -123,7 +123,7 @@ bower assets as well!
 
 1. This bundle assumes your website uses Bootstrap 3. If it doesn't you'll need
 to override and modify the templates.
-See the [example template](./Resources/doc/bootstrap2-example.md)
+See the [example template for Bootstrap 2](./Resources/doc/bootstrap2-example.md).
 
 2. The configuration for this bundle is not siteaccess aware. If your site has
 different layouts for different siteaccesses, you can either override the
